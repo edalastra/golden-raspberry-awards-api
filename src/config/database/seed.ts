@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { parse } from 'csv-parse';
 import env from '../../shared/env.js';
 import { prisma } from './prisma.client.js';
+import { CsvBatch } from './csv-batch.model.js';
 
 const errorStream = fs.createWriteStream('../../rows_with_error.json', { flags: 'a' });
 
@@ -12,7 +13,7 @@ function splitProducersName(producers: string): string[] {
         .filter(name => name.length > 0);
 }
 
-async function clearDatabase(batch: any[]) {
+async function clearDatabase() {
     console.log('Clearing database...');
     await prisma.movies.deleteMany({});
     await prisma.producers.deleteMany({});
@@ -20,9 +21,9 @@ async function clearDatabase(batch: any[]) {
     await prisma.$executeRawUnsafe(`DELETE FROM sqlite_sequence WHERE name IN ('Movies', 'Producers');`);    
 }
 
-async function saveBatch(batch: any[]) {
+async function saveBatch(batch: CsvBatch[]) {
     try {
-        await clearDatabase(batch);
+        await clearDatabase();
         const operations = batch.map(row => {
             const producersName = splitProducersName(row.producers);
 
