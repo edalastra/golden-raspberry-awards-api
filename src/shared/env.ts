@@ -3,5 +3,6 @@ const version = packageJson.version;
 
 export default {
     APP_VERSION: version,
-    PORT: process.env.PORT || 3000
+    PORT: process.env.PORT || 3000,
+    DATABASE_URL:"file:./dev.db"
 };
