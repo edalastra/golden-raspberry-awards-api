@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+import { MultipleWinners } from "../../models/multiple-winners.model.js";
 
 export class AwardsRepository {
     constructor(private readonly prisma: PrismaClient) {}
 
-    public async getMultipleWinners(): Promise<any[]> {
+    public async getMultipleWinners(): Promise<MultipleWinners[]> {
         const mutipleWin = await this.prisma.producers.findMany({
             where: {
                 movies: {
@@ -33,6 +34,6 @@ export class AwardsRepository {
             }
         });
         
-        return mutipleWin.filter(producer => producer._count.movies > 1)
+        return mutipleWin.filter(producer => producer._count.movies > 1);
     }
 }

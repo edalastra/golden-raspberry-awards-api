@@ -7,7 +7,7 @@ export class AwardWinnerIntervalController {
     ) {}
 
     public async getAwards(req: Request, res: Response): Promise<any> {
-        const data = await this.awardWinnerIntervalService.getWinnersOrdenedByYear();
+        const data = await this.awardWinnerIntervalService.getAwardWinnersInterval();
 
         return res.json(data);
     }
