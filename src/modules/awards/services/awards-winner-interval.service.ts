@@ -31,7 +31,6 @@ export class AwardWinnerIntervalService {
     private getFlattenedWinners(multipleWinners: MultipleWinners[]): AwardWinnerInterval[] {
         return multipleWinners.flatMap(producer => {
             const years = producer.movies.map(movie => movie.year);
-            console.log(producer);
             return years.slice(1).map((year, i): AwardWinnerInterval => ({
                 producer: producer.name,
                 interval: year - years[i],
