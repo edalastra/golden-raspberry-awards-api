@@ -1,6 +1,7 @@
 import env from './shared/env.js';
 import { createApp } from './config/app.js';
 import { seedDatabase } from './config/database/seed.js';
+import { logger } from './shared/utils/logger.js';
 
 const startServer = async () => {
     await seedDatabase(env.CSV_PATH);
@@ -13,7 +14,7 @@ const startServer = async () => {
         });
     });
 
-    app.listen(env.PORT, () => console.log('Server running on ' + env.PORT));
+    app.listen(env.PORT, () => logger.info('Server running on ' + env.PORT));
 }
 
 startServer().catch(error => {

@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 import fs from 'node:fs';
 import { parse } from 'csv-parse';
 import env from '../../shared/env.js';
 import { prisma } from './prisma.client.js';
 import { CsvBatch } from './csv-batch.model.js';
+import { logger } from '../../shared/utils/logger.js';
 
 const errorStream = fs.createWriteStream('../../rows_with_error.json', { flags: 'a' });
 
@@ -14,10 +16,10 @@ function splitProducersName(producers: string): string[] {
 }
 
 async function clearDatabase() {
-    console.log('Clearing database...');
+    logger.info('Clearing database...');
     await prisma.movies.deleteMany({});
     await prisma.producers.deleteMany({});
-    console.log('Database cleared successfully.');
+    logger.info('Database cleared successfully.');
     await prisma.$executeRawUnsafe(`DELETE FROM sqlite_sequence WHERE name IN ('Movies', 'Producers');`);    
 }
 
@@ -44,7 +46,7 @@ async function saveBatch(batch: CsvBatch[]) {
 
         await prisma.$transaction(operations);
     } catch (error) {
-        console.error('Error saving batch:', error);
+        logger.error('Error saving batch:', error);
         const errorMessage = error instanceof Error ? error.message : String(error);
         errorStream.write(JSON.stringify({ error: errorMessage, batch } + '\n'));
     }
@@ -62,7 +64,7 @@ export async function seedDatabase(csvPath: string) {
         let batch = [];
         let totalProcessed = 0;
 
-        console.log('Starting database seeding...');
+        logger.info('Starting database seeding...');
         console.time('timeToSeedDatabase');
         for await (const row of parser) {
             batch.push(row);
@@ -70,7 +72,6 @@ export async function seedDatabase(csvPath: string) {
             if (batch.length >= env.BATCH_SIZE) {
                 await saveBatch(batch);
                 totalProcessed += batch.length;
-                console.log(`Processed ${totalProcessed} records...`);
                 batch = [];
             }
         }
@@ -80,9 +81,9 @@ export async function seedDatabase(csvPath: string) {
             totalProcessed += batch.length;
         }
 
-        console.log(`Processed ${totalProcessed} records...`);
+        logger.info(`Processed ${totalProcessed} records...`);
     } catch (error) {
-        console.error('Error seeding database:', error);
+        logger.error('Error seeding database:', error);
     } finally {
         await prisma.$disconnect();
         console.timeEnd('timeToSeedDatabase');
