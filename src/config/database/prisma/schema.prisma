@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Movies {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   year      Int
   title     String
-  winner    Boolean
-  producers  Producers[]
+  winner    Boolean     @default(false)
+  producers Producers[] @relation("MovieProducers")
 }
 
 model Producers {
   id        Int      @id @default(autoincrement())
   name      String
-  movies     Movies[]
+  movies Movies[]    @relation("MovieProducers")
 }
