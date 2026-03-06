@@ -22,6 +22,7 @@ async function clearDatabase(batch: any[]) {
 
 async function saveBatch(batch: any[]) {
     try {
+        await clearDatabase(batch);
         const operations = batch.map(row => {
             const producersName = splitProducersName(row.producers);
 
