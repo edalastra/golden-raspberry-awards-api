@@ -13,7 +13,8 @@ export default defineConfig([
         "no-console": "warn",
         "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
         "no-redeclare": "error",
-        "@typescript-eslint/no-explicit-any": "error"
+        "@typescript-eslint/no-explicit-any": "error",
+        "quotes": ["error", "double"],
     }
   },
   tseslint.configs.recommended,

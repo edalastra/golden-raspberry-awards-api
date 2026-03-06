@@ -1,1 +1,1 @@
-export * from './awards-winner-interval.service.js';
+export * from "./awards-winner-interval.service.js";

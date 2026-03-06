@@ -28,7 +28,7 @@ export class AwardsRepository {
                         winner: true
                     },
                     orderBy: {
-                        year: 'asc'
+                        year: "asc"
                     }
                 }
             }

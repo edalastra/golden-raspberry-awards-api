@@ -1,4 +1,4 @@
-import packageJson from '../../package.json' with { type: 'json' };
+import packageJson from "../../package.json" with { type: "json" };
 const version = packageJson.version;
 const appName = packageJson.name;
 
@@ -9,5 +9,5 @@ export default {
     PORT: process.env.PORT || 3000,
     DATABASE_URL:"file:./dev.db",
     BATCH_SIZE: 1000,
-    CSV_PATH: 'src/data/movielist.csv'
+    CSV_PATH: "src/data/movielist.csv"
 };

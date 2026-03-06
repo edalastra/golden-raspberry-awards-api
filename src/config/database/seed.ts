@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import fs from 'node:fs';
-import { parse } from 'csv-parse';
-import env from '../../shared/env.js';
-import { prisma } from './prisma.client.js';
-import { CsvBatch } from './csv-batch.model.js';
-import { logger } from '../../shared/utils/logger.js';
+import fs from "node:fs";
+import { parse } from "csv-parse";
+import env from "../../shared/env.js";
+import { prisma } from "./prisma.client.js";
+import { CsvBatch } from "./csv-batch.model.js";
+import { logger } from "../../shared/utils/logger.js";
 
-const errorStream = fs.createWriteStream('../../rows_with_error.json', { flags: 'a' });
+const errorStream = fs.createWriteStream("../../rows_with_error.json", { flags: "a" });
 
 function splitProducersName(producers: string): string[] {
     return producers
@@ -16,11 +16,11 @@ function splitProducersName(producers: string): string[] {
 }
 
 async function clearDatabase() {
-    logger.info('Clearing database...');
+    logger.info("Clearing database...");
     await prisma.movies.deleteMany({});
     await prisma.producers.deleteMany({});
-    logger.info('Database cleared successfully.');
-    await prisma.$executeRawUnsafe(`DELETE FROM sqlite_sequence WHERE name IN ('Movies', 'Producers');`);    
+    logger.info("Database cleared successfully.");
+    await prisma.$executeRawUnsafe("DELETE FROM sqlite_sequence WHERE name IN ('Movies', 'Producers');");    
 }
 
 async function saveBatch(batch: CsvBatch[]) {
@@ -33,7 +33,7 @@ async function saveBatch(batch: CsvBatch[]) {
                 data: {
                     year: parseInt(row.year),
                     title: row.title,
-                    winner: row.winner.toLowerCase() === 'yes',
+                    winner: row.winner.toLowerCase() === "yes",
                     producers: {
                         connectOrCreate: producersName.map(name => ({
                             where: { name },
@@ -46,9 +46,9 @@ async function saveBatch(batch: CsvBatch[]) {
 
         await prisma.$transaction(operations);
     } catch (error) {
-        logger.error('Error saving batch:', error);
+        logger.error("Error saving batch:", error);
         const errorMessage = error instanceof Error ? error.message : String(error);
-        errorStream.write(JSON.stringify({ error: errorMessage, batch } + '\n'));
+        errorStream.write(JSON.stringify({ error: errorMessage, batch } + "\n"));
     }
 }
 
@@ -56,7 +56,7 @@ export async function seedDatabase(csvPath: string) {
     try {
         const parser = fs.createReadStream(csvPath).pipe(parse({
             columns: true,
-            delimiter: ';',
+            delimiter: ";",
             trim: true,
             skip_empty_lines: true,
         }));
@@ -64,8 +64,8 @@ export async function seedDatabase(csvPath: string) {
         let batch = [];
         let totalProcessed = 0;
 
-        logger.info('Starting database seeding...');
-        console.time('timeToSeedDatabase');
+        logger.info("Starting database seeding...");
+        console.time("timeToSeedDatabase");
         for await (const row of parser) {
             batch.push(row);
 
@@ -83,10 +83,10 @@ export async function seedDatabase(csvPath: string) {
 
         logger.info(`Processed ${totalProcessed} records...`);
     } catch (error) {
-        logger.error('Error seeding database:', error);
+        logger.error("Error seeding database:", error);
     } finally {
         await prisma.$disconnect();
-        console.timeEnd('timeToSeedDatabase');
+        console.timeEnd("timeToSeedDatabase");
     }
 
 }

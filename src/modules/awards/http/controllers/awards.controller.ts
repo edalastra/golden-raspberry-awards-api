@@ -10,7 +10,7 @@ export class AwardWinnerIntervalController {
     ) {}
 
     public async getAwards(req: Request, res: Response): Promise<Response<AwardsIntervalResponse>> {
-        const traceId = req.headers['x-trace-id'] || 'N/A';
+        const traceId = req.headers["x-trace-id"] || "N/A";
         logger.info(`Trace ID: ${traceId} - Received request for award winners interval.`);
         
         try {
@@ -21,7 +21,7 @@ export class AwardWinnerIntervalController {
             return res.status(500).json({
                 traceId,
                 appVersion: env.APP_VERSION,
-                error: 'An error occurred while fetching award winners interval.'
+                error: "An error occurred while fetching award winners interval."
             });
         }
     }

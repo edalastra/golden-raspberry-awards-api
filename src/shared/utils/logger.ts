@@ -1,5 +1,5 @@
-import { createLogger, transports, config } from 'winston';
-import env from '../env.js';
+import { createLogger, transports, config } from "winston";
+import env from "../env.js";
 
 export const logger = createLogger({
   levels: config.syslog.levels,
