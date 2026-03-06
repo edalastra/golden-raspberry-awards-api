@@ -64,6 +64,6 @@ test/types/index.js
 # compiled app
 dist
 
-src/config/database/generated
+./generated
 
 *.db

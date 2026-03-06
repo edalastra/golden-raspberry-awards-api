@@ -1,8 +1,11 @@
 import packageJson from '../../package.json' with { type: 'json' };
 const version = packageJson.version;
 
+
 export default {
     APP_VERSION: version,
     PORT: process.env.PORT || 3000,
-    DATABASE_URL:"file:./dev.db"
+    DATABASE_URL:"file:./dev.db",
+    BATCH_SIZE: 1000,
+    CSV_PATH: 'src/data/movielist.csv'
 };
