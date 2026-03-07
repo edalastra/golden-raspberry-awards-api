@@ -8,12 +8,6 @@ const startServer = async () => {
 
     const app = createApp();
 
-    app.get("/health", (req, res) => {
-        res.status(200).json({
-            status: "ok", app_version: env.APP_VERSION
-        });
-    });
-
     app.listen(env.PORT, () => logger.info("Server running on " + env.PORT));
 }
 
