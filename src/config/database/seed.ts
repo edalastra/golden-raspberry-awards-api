@@ -15,7 +15,7 @@ function splitProducersName(producers: string): string[] {
         .filter(name => name.length > 0);
 }
 
-async function clearDatabase() {
+export async function clearDatabase() {
     logger.info("Clearing database...");
     await prisma.movies.deleteMany({});
     await prisma.producers.deleteMany({});
@@ -45,6 +45,7 @@ async function saveBatch(batch: CsvBatch[]) {
         });
 
         await prisma.$transaction(operations);
+        errorStream.close();
     } catch (error) {
         logger.error("Error saving batch:", error);
         const errorMessage = error instanceof Error ? error.message : String(error);

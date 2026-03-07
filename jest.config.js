@@ -1,11 +1,14 @@
 /** @type {import("jest").Config} **/
 export default {
-  rootDir: import.meta.dirname,
-  testEnvironment: "node",
-  displayName: "root-tests",
-  testMatch: ["<rootDir>/tests/**/*.test.ts"],
-  clearMocks: true,
-  preset: "ts-jest/presets/default-esm",
+	rootDir: import.meta.dirname,
+	testEnvironment: "node",
+	displayName: "root-tests",
+	testMatch: ["<rootDir>/tests/**/*.test.ts"],
+	clearMocks: true,
+	preset: "ts-jest/presets/default-esm",
+	moduleNameMapper: {
+	'^(\\.{1,2}/.*)\\.js$': '$1',
+	},
 	collectCoverageFrom: [
 		"<rootDir>/src/**/*.ts",
 		"!<rootDir>/src/tests/**",
