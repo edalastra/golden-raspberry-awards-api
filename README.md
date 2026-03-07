@@ -50,7 +50,7 @@ npm run test
 ---
 ## Endpoints da API
 
-### A documentação dos enpoints pode ser consultada no enpoint `/api-doc`.
+A documentação dos enpoints pode ser consultada no enpoint `/api-doc`.
 
 ---
 
@@ -68,7 +68,7 @@ npm run test
 2. Streaming de Dados: A leitura do csv utiliza streams e batch para criação no banco, garantindo que arquivos csvs maiores não causem problemas de memória na aplicação.
 3. Estruturação dos dados: Filmes e Produtores são persistidos em uma relação Many-to-Many, a aplicação trata automaticamente registros com mais de um produtor.
 
---
+---
 
 ## Oportunidade de melhorias mapeadas
 
