@@ -7,10 +7,10 @@
     "postinstall": "prisma generate",
     "setup": "prisma db push",
     "build": "rimraf dist && tsc",
-    "start": "npm run setup node dist/server.js",
+    "start": "npm run setup && node dist/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev": "npm run setup tsx watch src/server.ts",
+    "dev": "npm run setup && tsx watch src/server.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage --silent",
     "test:watch": "jest --watch"
   },

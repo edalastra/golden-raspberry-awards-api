@@ -50,7 +50,10 @@ npm run test
 ---
 ## Endpoints da API
 
-A documentação dos enpoints pode ser consultada no enpoint `/api-doc`.
+`/v1/awards/winners-interval` Retorna produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois
+prêmios mais rápido. 
+
+A documentação detalhada dos enpoints pode ser consultada no enpoint `/api-doc`.
 
 ---
 

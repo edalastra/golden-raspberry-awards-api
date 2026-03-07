@@ -8,7 +8,7 @@ const appName = packageJson.name;
 export default {
     APP_VERSION: version,
     APP_NAME: appName,
-    PORT: process.env.PORT || 3000,
+    PORT: parseInt(process.env.PORT || "3000"),
     DATABASE_URL:"file:./dev.db",
     BATCH_SIZE: 1000,
     CSV_PATH: "src/data/movielist.csv"
