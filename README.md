@@ -54,6 +54,14 @@ npm run test
 
 ---
 
+## Variáveis de ambiente
+
+### Há um arquivo na pasta raiz chamando `.env`, nele estão algumas configurações
+- DATABASE_URL: url de conexão do Sqlite
+- PORT: Porta de execução do servidor
+- BATCH_SIZE: Tamanho do lote de dados que serão salvos por vez
+- CSV_PATH: Caminho do arquivo csv para importação de dados
+
 ## Notas de Implementação
 
 1. Maturidade de Richardson: A API implementa os verbos http e códigos de status.
