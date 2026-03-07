@@ -1,0 +1,82 @@
+openapi: 3.0.3
+
+info:
+  title: Golden Raspberry Awards API
+  version: 1.0.0
+  description: >-
+    Golden Raspberry Awards API
+paths:
+  /v1/awards/winners-interval:
+    description: Handler the awards winners interval
+    get:
+      tags: [Awards]
+      description: >-
+        Return the awards winners interval
+      responses:
+        200:
+          description: >-
+            Request successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1GetAwardWinnersIntervalResponse'
+        500:
+          $ref: '#/components/responses/500ServerError'
+components:
+  schemas:
+    V1GetAwardWinnersIntervalResponse:
+      type: object
+      properties:
+        min:
+          type: array
+          items:
+            $ref: '#/components/schemas/AwardWinnerInterval'
+        max:
+          type: array
+          items:
+            $ref: '#/components/schemas/AwardWinnerInterval'
+    AwardWinnerInterval:
+      type: object
+      properties:
+        producer:
+          type: string
+          description: Name of the producer
+        interval:
+          type: integer
+          description: Interval between awards
+        previousWin:
+          type: integer
+          description: Year of the previous win
+        followingWin:
+          type: integer
+          description: Year of the following win
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: ["failure"]
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        version:
+          type: string
+          description: API version
+  responses:
+    500ServerError:
+      description: An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: "ServerError"
+            message: >-
+              An unexpected error occurred.
+tags:
+  - name: Awards
+servers:
+  - url: 'http://localhost:3000'
+    description: 'local'
+    variables: {}

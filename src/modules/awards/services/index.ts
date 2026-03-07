@@ -1,0 +1,1 @@
+export * from "./awards-winner-interval.service.js";

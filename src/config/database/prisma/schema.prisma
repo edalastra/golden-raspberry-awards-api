@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Movies {
+  id        Int         @id @default(autoincrement())
+  year      Int
+  title     String      @unique
+  studios    String
+  winner    Boolean     @default(false)
+  producers Producers[] @relation("MovieProducers")
+}
+
+model Producers {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  movies Movies[]    @relation("MovieProducers")
+}
