@@ -6,7 +6,7 @@ import { prisma } from "./prisma.client.js";
 import { CsvBatch } from "./csv-batch.model.js";
 import { logger } from "../../shared/utils/logger.js";
 
-const errorStream = fs.createWriteStream("../../rows_with_error.json", { flags: "a" });
+const errorStream = fs.createWriteStream("rows_with_error.json", { flags: "a" });
 
 function splitProducersName(producers: string): string[] {
     return producers
@@ -48,7 +48,7 @@ async function saveBatch(batch: CsvBatch[]) {
     } catch (error) {
         logger.error("Error saving batch:", error);
         const errorMessage = error instanceof Error ? error.message : String(error);
-        errorStream.write(JSON.stringify({ error: errorMessage, batch } + "\n"));
+        errorStream.write(JSON.stringify({ error: errorMessage, batch }) + "\n");
     }
 }
 
@@ -89,7 +89,6 @@ export async function seedDatabase(csvPath: string) {
     } finally {
         await prisma.$disconnect();
         console.timeEnd("timeToSeedDatabase");
-        errorStream.end();
     }
 
 }

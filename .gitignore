@@ -66,6 +66,8 @@ dist
 
 ./generated
 
-./temp_data.csv
+temp_test_data.csv
+
+rows_with_error.json
 
 *.db
