@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import packageJson from "../../package.json" with { type: "json" };
 const version = packageJson.version;
 const appName = packageJson.name;
