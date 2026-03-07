@@ -7,18 +7,9 @@ import { CsvBatch } from "../../../src/config/database/csv-batch.model.js";
 import { MockData, mockMultipleWinnersCsvData, mockNoIntervalsCsvData, mockSimpleCsvData, mockTieMinMaxCsvData } from "./mock-data.js";
 import { AwardWinnerIntervalService } from "../../../src/modules/awards/services/awards-winner-interval.service.js";
 import env from "../../../src/shared/env.js";
+import { createTempCsvFile } from "../../utils/csv-utils.js";
 
 const app = createApp();
-
-const createTempCsvFile = (content: CsvBatch[]): string => {
-	const tempFilePath = "temp_test_data.csv";
-	const csvContent = [
-		"year;title;producers;winner",
-		...content.map(row => `${row.year};${row.title};${row.producers};${row.winner}`)
-	].join("\n");
-	fs.writeFileSync(tempFilePath, csvContent);
-	return tempFilePath;
-};
 
 describe("AwardsController (e2e)", () => {
 	describe("GET /awards/winners-interval", () => {

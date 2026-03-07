@@ -34,6 +34,7 @@ async function saveBatch(batch: CsvBatch[]) {
                     year: parseInt(row.year),
                     title: row.title,
                     winner: row.winner.toLowerCase() === "yes",
+                    studios: row.studios,
                     producers: {
                         connectOrCreate: producersName.map(name => ({
                             where: { name },
@@ -68,6 +69,7 @@ export async function seedDatabase(csvPath: string) {
         logger.info("Starting database seeding...");
         console.time("timeToSeedDatabase");
         for await (const row of parser) {
+            console.log(row);
             batch.push(row);
 
             if (batch.length >= env.BATCH_SIZE) {

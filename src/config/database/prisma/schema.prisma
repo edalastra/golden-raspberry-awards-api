@@ -13,6 +13,7 @@ model Movies {
   id        Int         @id @default(autoincrement())
   year      Int
   title     String      @unique
+  studios    String
   winner    Boolean     @default(false)
   producers Producers[] @relation("MovieProducers")
 }
