@@ -25,7 +25,6 @@ export async function clearDatabase() {
 
 async function saveBatch(batch: CsvBatch[]) {
     try {
-        await clearDatabase();
         const operations = batch.map(row => {
             const producersName = splitProducersName(row.producers);
 
@@ -46,7 +45,6 @@ async function saveBatch(batch: CsvBatch[]) {
         });
 
         await prisma.$transaction(operations);
-        errorStream.close();
     } catch (error) {
         logger.error("Error saving batch:", error);
         const errorMessage = error instanceof Error ? error.message : String(error);
@@ -56,6 +54,7 @@ async function saveBatch(batch: CsvBatch[]) {
 
 export async function seedDatabase(csvPath: string) {
     try {
+        await clearDatabase();
         const parser = fs.createReadStream(csvPath).pipe(parse({
             columns: true,
             delimiter: ";",
@@ -90,6 +89,7 @@ export async function seedDatabase(csvPath: string) {
     } finally {
         await prisma.$disconnect();
         console.timeEnd("timeToSeedDatabase");
+        errorStream.end();
     }
 
 }
