@@ -68,7 +68,6 @@ export async function seedDatabase(csvPath: string) {
         logger.info("Starting database seeding...");
         console.time("timeToSeedDatabase");
         for await (const row of parser) {
-            console.log(row);
             batch.push(row);
 
             if (batch.length >= env.BATCH_SIZE) {

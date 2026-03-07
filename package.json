@@ -9,8 +9,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "dev": "tsx watch src/server.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage",
-    "test:watch": "jest --watch"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage --silent",
+    "test:watch": "jest --watch",
+    "postinstall": "prisma generate"
+
   },
   "repository": {
     "type": "git",
