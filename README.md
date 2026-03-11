@@ -7,7 +7,7 @@ A aplicação processa automaticamente um arquivo CSV dentro `src/data` ao inici
 
 ## Tecnologias Utilizadas
 
-* **Runtime:** [Node.js v20+](https://nodejs.org/)
+* **Runtime:** [Node.js v22+](https://nodejs.org/)
 * **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
 * **Framework:** [Express](https://expressjs.com/)
 * **ORM:** [Prisma](https://www.prisma.io/)
