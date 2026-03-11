@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { seedDatabase } from "../../../src/config/database/seed";
 import { createTempCsvFile } from "../../utils/csv-utils";
 import { prisma } from "../../../src/config/database/prisma.client";
@@ -158,7 +157,7 @@ describe("Database Seeding", () => {
                 id: expect.any(Number),
                 name: "Producer 1"
             },
-             {
+            {
                 id: expect.any(Number),
                 name: "Producer 2"
             }

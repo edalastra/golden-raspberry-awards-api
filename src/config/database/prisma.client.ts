@@ -5,11 +5,11 @@ import { PrismaClient } from "@prisma/client";
 const connectionString = env.DATABASE_URL;
 
 const adapter = new PrismaBetterSqlite3({
-  url: connectionString,
+    url: connectionString,
 });
 
 const prisma = new PrismaClient({
-  adapter,
+    adapter,
 });
 
 export { prisma };

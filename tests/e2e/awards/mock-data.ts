@@ -1,4 +1,3 @@
-import e from "cors";
 import { CsvBatch } from "../../../src/config/database/csv-batch.model";
 import { AwardsIntervalResponse } from "../../../src/modules/awards/models/awards-response.model";
 
@@ -51,7 +50,7 @@ export const mockMultipleWinnersCsvData = {
                 previousWin: 2001,
                 followingWin: 2001
             },
-             {
+            {
                 producer: "Producer 3",
                 interval: 0,
                 previousWin: 2001,

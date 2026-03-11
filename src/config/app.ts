@@ -8,14 +8,14 @@ import { swaggerUi, swaggerDocument } from "./swagger.js";
 import { notFound } from "../shared/http/middlewares/not-found.middleware.js";
 
 export function createApp() {
-  const app = express();
-  app.use(cors());
-  app.use(bodyParser.json());
-  app.use(putTraceIdInRequest);
-  app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  app.use(router);  
-  app.use(notFound);
-  app.use(errorMiddleware);
+    const app = express();
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(putTraceIdInRequest);
+    app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    app.use(router);  
+    app.use(notFound);
+    app.use(errorMiddleware);
 
-  return app;
+    return app;
 }

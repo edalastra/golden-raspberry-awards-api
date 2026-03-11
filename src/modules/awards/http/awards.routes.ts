@@ -6,8 +6,8 @@ const awardsRouter = Router();
 const awardWinnerIntervalController = awardWinnerIntervalControllerFactory();
 
 awardsRouter.get(
-  "/winners-interval",
-  awardWinnerIntervalController.getAwards.bind(awardWinnerIntervalController)
+    "/winners-interval",
+    awardWinnerIntervalController.getAwards.bind(awardWinnerIntervalController)
 );
 
 export default awardsRouter;
